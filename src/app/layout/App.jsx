@@ -1,15 +1,17 @@
 import './style.css';
 import React from 'react'
-import {Button} from 'semantic-ui-react'
-function App() {
-    return (
-        <div className="App">
-            <h1>Events</h1>
+import {Button, Container} from 'semantic-ui-react'
+import EventDashboard from '../../features/events/EventDashboard/EventDashboard';
+import NavBar from '../../features/nav/NavBar'
 
-            <button className= 'ui con red button'>
-                <i className='user icon'/> User
-            </button>
-            <Button toggle icon='user' content='React Button' color='compact'  />
+
+const App = ()=>{
+    return(
+        <div>
+           <NavBar/>
+            <Container className='main'>
+                <EventDashboard/>
+            </Container>
         </div>
     )
 }
