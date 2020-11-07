@@ -18,12 +18,17 @@ const EventDashboard =({openForm, setOpenForm, selectedEvent, selectEventFunctio
                 selectEventFunction(null)
         }
 
+        // Delete Event from events list
+        const handleEventDelete=(eventId)=>{
+                setEvents(events.filter(evnt=>evnt.id !== eventId))
+        }
+
         //Two column : One For Event Left column and other for Right Colmn Form
         return(
                 <Grid>
                         {/* Event List Column Here */}
                         <Grid.Column width={10} >
-                               <EventList events={events} selectEventFunction={selectEventFunction}/>
+                               <EventList deleteEvent={handleEventDelete} events={events} selectEventFunction={selectEventFunction}/>
                         </Grid.Column>
 
                         {/* Form Column Here */}

@@ -4,11 +4,15 @@ import {Container} from 'semantic-ui-react'
 import EventDashboard from '../../features/events/EventDashboard/EventDashboard';
 import NavBar from '../../features/nav/NavBar'
 import 'semantic-ui-css/semantic.min.css'
+import { Route } from 'react-router-dom';
+import EventDetailed from '../../features/events/EventDashboard/EventDetailed';
+import EventForm from '../../features/events/EventForm/EventForm';
+import HomePage from '../../features/events/HomePage/HomePage';
 
 
 const App = ()=>{
     // Show Hide Form State
-    const [openForm, setOpenForm] = useState(false)
+    const [openForm, setOpenForm] = useState(true)
     // Selected Event From List Of events
     const [selectedEvent, setSelectedEvent]= useState(null)
 
@@ -25,22 +29,32 @@ const App = ()=>{
         setOpenForm(true)
     }
 
-    return(
-        <div>
-            {/* Navbar Here........... */}
-           <NavBar setOpenForm={handleOpenForm}/>
+    return (
+        <>
+        
+            <Route exact path='/' component={HomePage} />
 
-            {/* Full body Dashboard Event And Form */}
-            <Container className='main'>
-                <EventDashboard 
-                    openForm={openForm} 
-                    setOpenForm={setOpenForm} 
-                    selectedEvent={selectedEvent}
-                    selectEventFunction={selectEventFunction}
-                />
-            </Container>
-        </div>
-    )
+            <Route path={'/(.+)'}  
+                            render={()=>(
+                <>
+                    <NavBar setOpenForm={handleOpenForm}/>
+                    <Container className='main'>
+                        <Route path='/events' component={EventDashboard}/>
+                        <Route path='/eventdetail/:id' component={EventDetailed}/>
+                        <Route path='/form' component={EventForm} />
+                    </Container>
+                </>
+            )}  
+            />
+        </>
+    );
 }
 
 export default App;
+
+                    // <EventDashboard 
+                    // openForm={openForm} 
+                    // setOpenForm={setOpenForm} 
+                    // selectedEvent={selectedEvent}
+                    // selectEventFunction={selectEventFunction}
+                

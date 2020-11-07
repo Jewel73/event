@@ -22,7 +22,7 @@ export default function EventForm({setOpenForm, createEvent, selectedEvent, hand
                 createEvent({...values, id:  cuid(), hostedBy: "BOB", attendees:[]} )
                 setOpenForm(false)
         };
-        // Changing Values Every Input Field by it's field And keep previus field value
+        // Updating state Values By targeting its field "name"
         const handleValueOnChange =(e)=>{
                 const {name, value} = e.target ;
                 setValues({...values, [name]: value})
